@@ -1,0 +1,36 @@
+{
+  "name": "html-artifact-generator",
+  "displayName": "HTML Artifact Generator",
+  "version": "0.1.0",
+  "description": "Generate polished standalone single-file HTML artifacts from Markdown files, conversation context, plans, reports, PR reviews, diagrams, explainers, prototypes, and editor-style workflows.",
+  "categories": [
+    "Productivity",
+    "Writing",
+    "Developer Tools"
+  ],
+  "tags": [
+    "html",
+    "artifact",
+    "markdown",
+    "report",
+    "presentation",
+    "single-file"
+  ],
+  "license": "NOASSERTION",
+  "source": {
+    "type": "github",
+    "url": "https://github.com/<owner>/html-artifact-generator-skill",
+    "path": "skills/html-artifact-generator"
+  },
+  "artifacts": [
+    {
+      "type": "skill",
+      "path": "dist/html-artifact-generator.skill"
+    }
+  ],
+  "entrypoint": "skills/html-artifact-generator/SKILL.md",
+  "requirements": {
+    "runtime": "Codex skills",
+    "externalNetwork": false
+  }
+}
