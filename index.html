@@ -98,6 +98,32 @@
       color: var(--white);
     }
 
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--slate);
+      font-family: var(--mono);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .repo-link:hover {
+      border-color: var(--clay-dark);
+      color: var(--clay-dark);
+    }
+
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
@@ -331,6 +357,7 @@
       .section-head { grid-template-columns: 1fr; gap: 10px; }
       .event { grid-template-columns: 1fr; }
       .topbar { align-items: stretch; }
+      .top-actions { justify-content: space-between; flex-wrap: wrap; }
       .lang-toggle { justify-content: center; }
     }
   </style>
@@ -339,9 +366,12 @@
   <main class="page">
     <nav class="topbar" aria-label="Page">
       <div class="brand"><span class="mark">H</span><span>HTML Go / Codex Skill</span></div>
-      <div class="lang-toggle" aria-label="Language switch">
-        <button class="active" type="button" data-set-lang="zh">中文</button>
-        <button type="button" data-set-lang="en">English</button>
+      <div class="top-actions">
+        <a class="repo-link" href="https://github.com/zacktian89/html-go-skill">GitHub</a>
+        <div class="lang-toggle" aria-label="Language switch">
+          <button class="active" type="button" data-set-lang="zh">中文</button>
+          <button type="button" data-set-lang="en">English</button>
+        </div>
       </div>
     </nav>
 
