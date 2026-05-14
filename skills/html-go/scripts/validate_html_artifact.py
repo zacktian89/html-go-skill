@@ -16,6 +16,9 @@ REMOTE_LINK_DEP_RE = re.compile(
     r"""<link\b[^>]*href\s*=\s*["'](?:https?:)?//""",
     re.IGNORECASE,
 )
+LONG_CODELIKE_TOKEN_RE = re.compile(
+    r"\b[A-Za-z0-9][A-Za-z0-9_./:-]{24,}\b",
+)
 
 
 def fail(message: str) -> None:
@@ -31,6 +34,17 @@ def strip_tags(html: str) -> str:
     html = re.sub(r"<style\b[^>]*>.*?</style>", " ", html, flags=re.IGNORECASE | re.DOTALL)
     html = re.sub(r"<[^>]+>", " ", html)
     return re.sub(r"\s+", " ", html).strip()
+
+
+def extract_styles(html: str) -> str:
+    return "\n".join(
+        match.group(1)
+        for match in re.finditer(
+            r"<style\b[^>]*>(.*?)</style>",
+            html,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+    )
 
 
 def resolve_html_file(path: Path) -> Path | None:
@@ -54,6 +68,8 @@ def validate(path: Path) -> int:
     errors = 0
     text = html_file.read_text(encoding="utf-8")
     lower = text.lower()
+    styles = extract_styles(text).lower()
+    visible_text = strip_tags(text)
 
     checks = [
         (html_file.suffix.lower() == ".html", "file extension must be .html"),
@@ -72,10 +88,16 @@ def validate(path: Path) -> int:
 
     if "@media" not in text:
         warn("no responsive @media rule found")
-    if len(strip_tags(text)) < 400:
+    if len(visible_text) < 400:
         warn("body text appears sparse; confirm the artifact is useful")
     if "<script" in lower and "addEventListener" not in text and "onclick" not in lower:
         warn("script block found but no obvious interaction handler")
+    if ("display: grid" in styles or "display:flex" in styles or "display: flex" in styles) and "min-width: 0" not in styles:
+        warn("grid/flex layout found without min-width: 0; nested cards or long text may overflow parent borders")
+    if LONG_CODELIKE_TOKEN_RE.search(visible_text) and "overflow-wrap" not in styles and "word-break" not in styles:
+        warn("long code-like text found without overflow-wrap/word-break; identifiers, URLs, or commands may clip")
+    if ("flow" in lower or "diagram" in lower) and "repeat(3" in styles and "auto-fit" not in styles:
+        warn("dense flow/diagram grid uses fixed 3-column repeat without auto-fit; check narrow-width clipping")
 
     if errors:
         print(f"Validation failed: {errors} error(s) in {html_file}")

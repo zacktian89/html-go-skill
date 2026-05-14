@@ -53,10 +53,41 @@ Use this visual language for all artifacts. Reproduce the feel of the original H
 - For slide-deck or presentation-style artifacts, desktop presentation mode must fit inside the current viewport: set the outer deck to `height: 100vh` and prevent body-level scrolling.
 - Do not rely on vertical scrolling to deliver primary slide content in presentation mode. If a slide is taller than the remaining viewport, split it into additional slides by idea, diagram, table, or appendix segment. Use active-slide internal scrolling only as a last-resort fallback for appendix-style content.
 - Avoid fixed-width content except code panels and SVG diagrams with `overflow-x: auto`.
+- Put `min-width: 0` on grid/flex children that contain cards, diagrams, tables, prompts, code-like text, or nested grids. CSS grid items default to `min-width: auto`, which can make long text push cards into the right border.
+- Put `overflow-wrap: anywhere` or `word-break: break-word` on labels, node titles, prompt boxes, URLs, commands, identifiers, and inline-code-heavy paragraphs. This is required for long names such as `docs_researcher`, `report_agent_job_result`, package names, and file paths.
+- For multi-node flow diagrams inside cards, prefer vertical flow or `grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))` for node groups. Avoid squeezing three or more nodes into a half-width column.
+- Keep at least `12px` of inner breathing room between nested flow/table/card content and its parent border. If content visually touches the right border at common widths, collapse the nested grid earlier or stack it.
 - When an SVG diagram is part of a presentation slide, prefer scaling it to the container with `width: min(100%, <natural-width>px); height: auto;` before falling back to horizontal scroll.
 - In SVG diagrams, reserve clear space for every label and never place free-floating text over boxes, connector lines, or other labels. If a sentence explains the diagram as a whole, render it as an HTML callout below or above the diagram.
 - Keep interactive controls reachable on mobile. Sticky toolbars are allowed for editor pages.
 - Do not use external fonts, images, stylesheets, scripts, or icon libraries.
+
+## Overflow-Safe CSS Pattern
+
+Use this pattern for dense cards, flow diagrams, prompt blocks, and nested grids:
+
+```css
+.card,
+.flow,
+.flow-node,
+.prompt-line,
+.table-wrap {
+  min-width: 0;
+}
+
+.flow-stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.flow-node strong,
+.prompt-line,
+.long-text {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+```
 
 ## Interaction Rules
 

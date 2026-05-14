@@ -52,7 +52,7 @@ Create an incident report with impact summary, minute-by-minute timeline, detect
 
 ## 13. Annotated Flowchart
 
-Create an annotated process page with an inline SVG flowchart, clickable steps or hover/focus details, timing/failure path notes, and a legend.
+Create an annotated process page with an inline SVG flowchart, clickable steps or hover/focus details, timing/failure path notes, and a legend. Keep every node label readable at narrow widths; stack dense node groups or use auto-fit grids instead of compressed columns.
 
 ## 14. Feature Explainer
 
@@ -60,11 +60,11 @@ Create a feature explainer with TL;DR, request/data path, collapsible steps, tab
 
 ## 15. Concept Explainer
 
-Create a teaching artifact with a visual model, interactive controls when helpful, comparison table, worked examples, glossary, and misconceptions.
+Create a teaching artifact with a visual model, interactive controls when helpful, comparison table, worked examples, glossary, and misconceptions. For concept diagrams with long labels or code-like names, include shrink-safe grid children and explicit wrapping rules.
 
 ## 16. Implementation Plan
 
-Create a handoff-ready implementation plan with summary metrics, numbered milestones, data flow diagram, lightweight mockups, key code/contracts, risk table, and open questions.
+Create a handoff-ready implementation plan with summary metrics, numbered milestones, data flow diagram, lightweight mockups, key code/contracts, risk table, and open questions. Check that nested cards, flow nodes, and prompt/code panels stay inside their parent borders on desktop and mobile.
 
 ## 17. PR Writeup
 

@@ -35,6 +35,7 @@ Turn a finished discussion, plan, review, report, or Markdown source into a brow
 - Include copy/export buttons only for editor-style artifacts.
 - If the source is thin, create a useful page anyway and include a small "Open questions" or "Missing context" section.
 - Escape untrusted source text before placing it in HTML. Treat generated JavaScript as code that must be simple and auditable.
+- Prevent layout clipping and border crowding: every card, grid child, flow node, table wrapper, and prompt/code-like text container that sits inside CSS grid/flex must be allowed to shrink with `min-width: 0`; long identifiers, URLs, command lines, and inline-code-heavy text must use `overflow-wrap: anywhere` or an equivalent safe wrapping rule.
 
 ## Quality Bar
 
@@ -42,4 +43,4 @@ Turn a finished discussion, plan, review, report, or Markdown source into a brow
 - Use strong visual hierarchy: eyebrow, serif title, compact summary, numbered sections, tables/cards/diagrams chosen to fit the content.
 - Keep text scannable. Prefer side-by-side comparison, timelines, risk tables, annotated blocks, and collapsible details over long prose.
 - For slide decks, verify each slide fits in desktop presentation mode without vertical scrolling. Split dense diagrams, tables, and multi-card comparisons across slides.
-- Ensure mobile responsiveness with grid fallbacks and no horizontal overflow except intentional code/diff panels.
+- Ensure mobile responsiveness with grid fallbacks and no horizontal overflow except intentional code/diff panels. Visually check dense card grids and flow diagrams at both desktop and narrow widths; content should never touch or cross the right border of its parent.
