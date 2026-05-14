@@ -8,6 +8,8 @@ HTML Go 是一个 Codex skill，用来把 Markdown、讨论记录、方案文档
 
 它的判断很简单：Markdown 适合记录、传输和长期保存；HTML 更适合展示、比较、交互和现场决策。HTML Go 不会要求所有内容都变成 HTML，它只在页面布局、颜色层级、图表、交互控件或可视化结构能明显提升交付质量时触发。
 
+效果预览：[项目首页](https://zacktian89.github.io/html-go-skill/)
+
 ## 项目初衷
 
 过去一年，AI 输出正在从“聊天窗口里的 Markdown”转向“可打开、可交互、可复用的 artifact”：
@@ -165,6 +167,8 @@ No license has been selected yet. Add a license before public release if you wan
 HTML Go is a Codex skill that turns Markdown files, conversation context, plans, PR reviews, reports, flow explanations, and prototype notes into polished standalone HTML artifacts that open directly in a browser.
 
 The position is intentionally narrow: Markdown is excellent for capture, transport, and long-term memory; HTML is better when the output needs layout, comparison, interaction, diagrams, or presentation polish. HTML Go does not turn every answer into HTML. It chooses HTML only when the medium materially improves the deliverable.
+
+Live preview: [Project homepage](https://zacktian89.github.io/html-go-skill/)
 
 ## Why This Exists
 
