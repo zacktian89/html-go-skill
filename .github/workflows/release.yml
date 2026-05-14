@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "HTML Go ${{ github.ref_name }}"
+          body: |
+            HTML Go is a Codex skill for generating polished standalone HTML artifacts from Markdown, plans, reports, PR reviews, diagrams, explainers, prototypes, and editor-style workflows.
+
+            Assets:
+            - `html-go.skill` - packaged skill archive
+            - `README.html` - bilingual promotional HTML page
+            - `codex-skill.json` - marketplace submission metadata
+          files: |
+            dist/html-go.skill
+            README.html
+            marketplaces/codex-skill.json
