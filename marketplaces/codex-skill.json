@@ -1,7 +1,7 @@
 {
   "name": "html-go",
   "displayName": "HTML Go",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate polished standalone single-file HTML artifacts from Markdown files, conversation context, plans, reports, PR reviews, diagrams, explainers, prototypes, and editor-style workflows.",
   "categories": [
     "Productivity",

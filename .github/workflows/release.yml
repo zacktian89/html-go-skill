@@ -26,7 +26,9 @@ jobs:
             - `html-go.skill` - packaged skill archive
             - `README.html` - bilingual promotional HTML page
             - `codex-skill.json` - marketplace submission metadata
+            - `STORE_SUBMISSION.md` - store submission copy
           files: |
             dist/html-go.skill
             README.html
             marketplaces/codex-skill.json
+            STORE_SUBMISSION.md
