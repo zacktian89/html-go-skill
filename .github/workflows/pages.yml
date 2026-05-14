@@ -29,7 +29,6 @@ jobs:
         run: |
           mkdir site
           cp index.html site/index.html
-          cp README.html site/README.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

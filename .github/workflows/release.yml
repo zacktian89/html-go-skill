@@ -24,11 +24,11 @@ jobs:
 
             Assets:
             - `html-go.skill` - packaged skill archive
-            - `README.html` - bilingual promotional HTML page
+            - `index.html` - bilingual promotional GitHub Pages homepage
             - `codex-skill.json` - marketplace submission metadata
             - `STORE_SUBMISSION.md` - store submission copy
           files: |
             dist/html-go.skill
-            README.html
+            index.html
             marketplaces/codex-skill.json
             STORE_SUBMISSION.md

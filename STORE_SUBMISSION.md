@@ -50,7 +50,7 @@ https://github.com/zacktian89/html-go-skill/releases/download/v0.1.0/html-go.ski
 
 ## Promotional HTML
 
-https://github.com/zacktian89/html-go-skill/releases/download/v0.1.0/README.html
+https://zacktian89.github.io/html-go-skill/
 
 ## Marketplace Metadata
 
