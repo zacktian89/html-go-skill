@@ -1,9 +1,9 @@
 ---
-name: html-artifact-generator
-description: Generate polished standalone single-file HTML artifacts from conversation context, Markdown files, plans, PR reviews, reports, diagrams, explainers, prototypes, editor-like workflows, or requests for Thariq-style "Unreasonable Effectiveness of HTML" deliverables. Use when the user asks to convert discussion or .md content into a browser-ready HTML file, requests an AI-generated HTML artifact instead of Markdown, or invokes html-artifact-generator.
+name: html-go
+description: Generate polished standalone single-file HTML artifacts from conversation context, Markdown files, plans, PR reviews, reports, diagrams, explainers, prototypes, editor-like workflows, or requests for Thariq-style "Unreasonable Effectiveness of HTML" deliverables. Use when the user asks to convert discussion or .md content into a browser-ready HTML file, requests an AI-generated HTML artifact instead of Markdown, or invokes html-go.
 ---
 
-# Html Artifact Generator
+# HTML Go
 
 ## Overview
 

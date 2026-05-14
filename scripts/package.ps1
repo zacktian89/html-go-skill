@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $Root = Split-Path -Parent $PSScriptRoot
-$SkillDir = Join-Path $Root "skills\html-artifact-generator"
+$SkillDir = Join-Path $Root "skills\html-go"
 $DistDir = Join-Path $Root "dist"
 $Packager = "D:\code\daily\.agents\skills\skill-creator\scripts\package_skill.py"
 

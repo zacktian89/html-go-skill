@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML Go"
+  short_description: "Create polished standalone HTML artifacts"
+  default_prompt: "Use $html-go to turn this Markdown or discussion into a polished standalone HTML artifact."
