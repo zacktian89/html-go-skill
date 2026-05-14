@@ -1,14 +1,24 @@
 # HTML Go
 
+Language: [中文](#中文) | [English](#english)
+
+## 中文
+
 HTML Go 是一个 Codex skill，用来把 Markdown、讨论记录、方案文档、评审意见、报告、流程图说明或产品原型描述，转换成可直接在浏览器打开的单文件 HTML 成品。
 
-它适合用在这些场景：
+它的判断很简单：Markdown 适合记录、传输和长期保存；HTML 更适合展示、比较、交互和现场决策。HTML Go 不会要求所有内容都变成 HTML，它只在页面布局、颜色层级、图表、交互控件或可视化结构能明显提升交付质量时触发。
 
-- 把一篇 Markdown 文章做成视觉层次更强的网页稿
-- 把需求分析、架构方案、PR review 或复盘报告做成可展示页面
-- 把长讨论整理成带时间线、风险表、对比卡片或折叠详情的 HTML artifact
-- 把演示材料做成分页式浏览器 slides
-- 把轻量编辑器、看板、筛选器或复制导出工具做成一个本地 HTML 文件
+## 项目初衷
+
+过去一年，AI 输出正在从“聊天窗口里的 Markdown”转向“可打开、可交互、可复用的 artifact”：
+
+- 2024-10-03，OpenAI 发布 Canvas，把写作和代码任务放进独立工作区，明确面向“超出简单聊天”的协作式编辑。[Source](https://openai.com/index/introducing-canvas/)
+- 2025-06-25，Anthropic 为 Claude Artifacts 推出独立空间，并称用户已经创建超过 5 亿个 artifacts；同一公告还把 artifacts 推向可分享、可交互的 AI-powered apps。[Source](https://claude.com/blog/build-artifacts)
+- 2026-02-26，Profound 的 Markdown vs HTML AI crawler 实验显示，Markdown 对 AI crawler 流量只有方向性优势，结果不具统计显著性。这提醒我们：Markdown 的机器可读性很重要，但“最终给人看的交付物”不能只按 crawler 假设来设计。[Source](https://www.tryprofound.com/resources/white-papers/markdown-html-llm-test)
+- 2026-05，arXiv 上出现 Single-File Test，观察 68 个 single-file HTML generations 和 HTML AI Battle 实验，说明“让模型生成可运行的单文件网页”已经成为一个可被评测和讨论的方向。[Source](https://arxiv.org/abs/2605.06707)
+- Thariq Shihipar 的 The Unreasonable Effectiveness of HTML 用 20 个自包含 HTML 示例展示了为什么比较、评审、设计、原型、图表、报告和编辑器类输出不应该总被压扁成 Markdown。[Source](https://thariqs.github.io/html-effectiveness/)
+
+HTML Go 的初衷就是把这个趋势变成一个可复用的 Codex skill：保留 Markdown 的轻便，同时在需要“真正被看懂、被点击、被讨论”的时候，把输出升级成单文件 HTML。
 
 ## 实际效果
 
@@ -47,12 +57,15 @@ html-artifacts/20260514-1015-project-plan.html
 - `dist/html-go.skill` - 可分发的 skill 包
 - `marketplaces/codex-skill.json` - 市场上架元数据
 - `scripts/package.ps1` - 校验和打包脚本
+- `README.html` - 使用 HTML Go 风格生成的宣传页
 
 ## 安装
 
 从源码安装：
 
 ```powershell
+git clone git@github.com:zacktian89/html-go-skill.git
+cd html-go-skill
 Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\" -Recurse
 ```
 
@@ -100,12 +113,132 @@ dist/html-go.skill
 
 ## 上架发布
 
-1. 创建 GitHub 仓库 `html-go`。
+1. 创建或打开 GitHub 仓库 `html-go-skill`。
 2. 推送本项目。
 3. 创建 GitHub Release。
 4. 上传 `dist/html-go.skill`。
-5. 把 `marketplaces/codex-skill.json` 里的 GitHub URL 替换为真实仓库地址。
-6. 将 `marketplaces/codex-skill.json` 提交到目标 skill 市场。
+5. 将 `marketplaces/codex-skill.json` 提交到目标 skill 市场。
+
+## License
+
+No license has been selected yet. Add a license before public release if you want others to reuse or modify the skill.
+
+## English
+
+HTML Go is a Codex skill that turns Markdown files, conversation context, plans, PR reviews, reports, flow explanations, and prototype notes into polished standalone HTML artifacts that open directly in a browser.
+
+The position is intentionally narrow: Markdown is excellent for capture, transport, and long-term memory; HTML is better when the output needs layout, comparison, interaction, diagrams, or presentation polish. HTML Go does not turn every answer into HTML. It chooses HTML only when the medium materially improves the deliverable.
+
+## Why This Exists
+
+AI output is moving from “Markdown in a chat box” toward artifacts that can be opened, edited, shared, and used:
+
+- On 2024-10-03, OpenAI introduced Canvas as a separate interface for writing and coding work that goes beyond simple chat. [Source](https://openai.com/index/introducing-canvas/)
+- On 2025-06-25, Anthropic introduced a dedicated space for Claude Artifacts and said users had created over half a billion artifacts. The same announcement pushed artifacts toward shareable, interactive AI-powered apps. [Source](https://claude.com/blog/build-artifacts)
+- On 2026-02-26, Profound published a Markdown vs HTML AI crawler experiment. Markdown showed a directional but statistically insignificant crawler traffic advantage, which is a useful reminder: machine readability matters, but human-facing deliverables should be designed for human use. [Source](https://www.tryprofound.com/resources/white-papers/markdown-html-llm-test)
+- In May 2026, the arXiv Single-File Test paper studied 68 single-file HTML generations across public HTML AI Battle experiments, showing that single-file web generation is becoming a trackable evaluation surface. [Source](https://arxiv.org/abs/2605.06707)
+- Thariq Shihipar's The Unreasonable Effectiveness of HTML collected 20 self-contained HTML examples showing why comparisons, reviews, design sheets, prototypes, diagrams, reports, decks, and mini-editors should not always be flattened into Markdown. [Source](https://thariqs.github.io/html-effectiveness/)
+
+HTML Go turns that shift into a reusable Codex skill: keep Markdown for lightweight text, but upgrade the final artifact to HTML when people need to scan, compare, click, present, or decide.
+
+## What It Produces
+
+HTML Go generates a complete `.html` file, not a generic Markdown preview:
+
+- Inline CSS and optional inline JavaScript in one file
+- No CDN, external fonts, external images, or build step
+- Structure chosen for the content: timelines, comparison tables, risk matrices, card grids, accordions, slide decks, or editor-style layouts
+- Chinese content stays Chinese, with a modern CJK font stack
+- Responsive layout for desktop and mobile
+- Validation through `validate_html_artifact.py` before handoff
+
+Example prompt:
+
+```text
+Use $html-go to turn this project plan into a standalone HTML artifact.
+```
+
+Example output path:
+
+```text
+html-artifacts/20260514-1015-project-plan.html
+```
+
+The generated page usually includes:
+
+- A compact summary
+- Structured sections
+- Visual tables, cards, diagrams, or timelines selected for the source
+- Useful interaction such as tabs, filters, accordions, copy buttons, or slide navigation
+- Open questions or missing context when the input is thin
+
+## Repository Layout
+
+- `skills/html-go/` - skill source
+- `dist/html-go.skill` - packaged distributable skill
+- `marketplaces/codex-skill.json` - marketplace listing metadata
+- `scripts/package.ps1` - validation and packaging helper
+- `README.html` - promotional HTML page generated in the style of HTML Go
+
+## Install
+
+Install from source:
+
+```powershell
+git clone git@github.com:zacktian89/html-go-skill.git
+cd html-go-skill
+Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\" -Recurse
+```
+
+Or use the packaged artifact:
+
+```powershell
+Copy-Item .\dist\html-go.skill $env:USERPROFILE\Downloads\
+```
+
+## Usage
+
+Invoke it explicitly in Codex:
+
+```text
+[$html-go] Turn this Markdown file into a browser-ready HTML page.
+```
+
+Or ask naturally:
+
+```text
+Turn this PR review into a polished HTML artifact.
+```
+
+When you provide a Markdown path, HTML Go reads and transforms that file. Without a file path, it uses the most relevant conversation context.
+
+Default output location:
+
+```text
+html-artifacts/YYYYMMDD-HHMM-<slug>.html
+```
+
+## Package
+
+Run:
+
+```powershell
+.\scripts\package.ps1
+```
+
+The script validates the skill and writes:
+
+```text
+dist/html-go.skill
+```
+
+## Publish
+
+1. Open the GitHub repository `html-go-skill`.
+2. Push this project.
+3. Create a GitHub Release.
+4. Upload `dist/html-go.skill`.
+5. Submit `marketplaces/codex-skill.json` to the target skill marketplace.
 
 ## License
 
