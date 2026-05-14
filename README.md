@@ -58,6 +58,7 @@ html-artifacts/20260514-1015-project-plan.html
 - `marketplaces/codex-skill.json` - 市场上架元数据
 - `scripts/package.ps1` - 校验和打包脚本
 - `README.html` - 使用 HTML Go 风格生成的宣传页
+- `index.html` - GitHub Pages 首页入口
 
 ## 安装
 
@@ -216,6 +217,7 @@ The generated page usually includes:
 - `marketplaces/codex-skill.json` - marketplace listing metadata
 - `scripts/package.ps1` - validation and packaging helper
 - `README.html` - promotional HTML page generated in the style of HTML Go
+- `index.html` - GitHub Pages homepage entrypoint
 
 ## Install
 
