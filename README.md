@@ -61,19 +61,56 @@ html-artifacts/20260514-1015-project-plan.html
 
 ## 安装
 
-从源码安装：
+### Codex
 
 ```powershell
 git clone git@github.com:zacktian89/html-go-skill.git
 cd html-go-skill
-Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\" -Recurse
+New-Item -ItemType Directory "$env:USERPROFILE\.codex\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\html-go" -Recurse -Force
 ```
 
-或者使用打包产物：
+安装后在 Codex 里使用 `$html-go` 触发。
+
+### Claude Code
+
+Claude Code 支持 Agent Skills，可以把同一个 skill 目录安装到个人 skill 目录：
 
 ```powershell
-Copy-Item .\dist\html-go.skill $env:USERPROFILE\Downloads\
+git clone git@github.com:zacktian89/html-go-skill.git
+cd html-go-skill
+New-Item -ItemType Directory "$env:USERPROFILE\.claude\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.claude\skills\html-go" -Recurse -Force
 ```
+
+安装后在 Claude Code 里使用 `/html-go`，或让 Claude 根据任务自动调用。
+
+### Gemini CLI
+
+Gemini CLI 使用自定义 slash command。先创建命令文件：
+
+```powershell
+New-Item -ItemType Directory "$env:USERPROFILE\.gemini\commands" -Force
+@'
+description = "Create a standalone HTML artifact from Markdown, plans, reviews, reports, or discussion context."
+prompt = """
+Use the HTML Go workflow: turn the provided Markdown, file path, or conversation context into a polished standalone single-file HTML artifact.
+
+Rules:
+- Write one .html file with inline CSS and optional inline JavaScript.
+- Do not use CDN, external fonts, external images, or build tools.
+- Choose a structure that fits the content, such as a timeline, comparison table, risk matrix, card grid, tabs, accordions, slide deck, or editor layout.
+- Preserve the source language.
+- Put the output under html-artifacts/YYYYMMDD-HHMM-<slug>.html when filesystem tools are available.
+"""
+'@ | Set-Content "$env:USERPROFILE\.gemini\commands\html-go.toml" -Encoding UTF8
+```
+
+安装后在 Gemini CLI 里使用 `/html-go` 加上你的文件路径或需求。
+
+### 打包文件
+
+`dist/html-go.skill` 是给支持 `.skill` 包导入的工具或市场使用的分发包。如果工具只能读取目录形式的 skill，优先安装 `skills/html-go/`。
 
 ## 用法
 
@@ -182,19 +219,56 @@ The generated page usually includes:
 
 ## Install
 
-Install from source:
+### Codex
 
 ```powershell
 git clone git@github.com:zacktian89/html-go-skill.git
 cd html-go-skill
-Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\" -Recurse
+New-Item -ItemType Directory "$env:USERPROFILE\.codex\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\html-go" -Recurse -Force
 ```
 
-Or use the packaged artifact:
+Use `$html-go` in Codex after installation.
+
+### Claude Code
+
+Claude Code supports Agent Skills, so the same skill directory can be installed as a personal skill:
 
 ```powershell
-Copy-Item .\dist\html-go.skill $env:USERPROFILE\Downloads\
+git clone git@github.com:zacktian89/html-go-skill.git
+cd html-go-skill
+New-Item -ItemType Directory "$env:USERPROFILE\.claude\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.claude\skills\html-go" -Recurse -Force
 ```
+
+Use `/html-go` in Claude Code, or let Claude invoke it automatically when the request matches.
+
+### Gemini CLI
+
+Gemini CLI uses custom slash commands. Create a command file:
+
+```powershell
+New-Item -ItemType Directory "$env:USERPROFILE\.gemini\commands" -Force
+@'
+description = "Create a standalone HTML artifact from Markdown, plans, reviews, reports, or discussion context."
+prompt = """
+Use the HTML Go workflow: turn the provided Markdown, file path, or conversation context into a polished standalone single-file HTML artifact.
+
+Rules:
+- Write one .html file with inline CSS and optional inline JavaScript.
+- Do not use CDN, external fonts, external images, or build tools.
+- Choose a structure that fits the content, such as a timeline, comparison table, risk matrix, card grid, tabs, accordions, slide deck, or editor layout.
+- Preserve the source language.
+- Put the output under html-artifacts/YYYYMMDD-HHMM-<slug>.html when filesystem tools are available.
+"""
+'@ | Set-Content "$env:USERPROFILE\.gemini\commands\html-go.toml" -Encoding UTF8
+```
+
+Use `/html-go` in Gemini CLI with a file path or request.
+
+### Packaged Artifact
+
+`dist/html-go.skill` is the distributable package for tools or marketplaces that support `.skill` imports. If a tool reads skill directories directly, install `skills/html-go/` first.
 
 ## Usage
 

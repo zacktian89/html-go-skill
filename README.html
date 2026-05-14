@@ -304,7 +304,7 @@
 
     .install {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
@@ -373,14 +373,14 @@ html-artifacts/20260514-1015-pr-review.html</pre>
       <div class="stat"><span>Format</span><strong>1 file</strong>内联 CSS 和可选 JS，无构建步骤。</div>
       <div class="stat"><span>Shape</span><strong>20 patterns</strong>覆盖评审、报告、图表、演示和编辑器。</div>
       <div class="stat"><span>Quality</span><strong>validated</strong>生成后运行基础 HTML 校验。</div>
-      <div class="stat"><span>Install</span><strong>.skill</strong>可源码安装，也可分发包安装。</div>
+      <div class="stat"><span>Install</span><strong>3 tools</strong>Codex、Claude Code 和 Gemini CLI 分别安装。</div>
     </div>
 
     <div class="stats" data-lang="en">
       <div class="stat"><span>Format</span><strong>1 file</strong>Inline CSS and optional JS. No build step.</div>
       <div class="stat"><span>Shape</span><strong>20 patterns</strong>Reviews, reports, diagrams, decks, and editors.</div>
       <div class="stat"><span>Quality</span><strong>validated</strong>Generated artifacts run through a basic HTML check.</div>
-      <div class="stat"><span>Install</span><strong>.skill</strong>Install from source or from the packaged skill.</div>
+      <div class="stat"><span>Install</span><strong>3 tools</strong>Install for Codex, Claude Code, or Gemini CLI.</div>
     </div>
 
     <section>
@@ -499,22 +499,57 @@ html-artifacts/20260514-1015-pr-review.html</pre>
     <section>
       <div class="section-head">
         <span class="num">04</span>
-        <div data-lang="zh"><h2>安装和使用</h2><p>项目已经打包成 `dist/html-go.skill`，也可以从源码目录安装。</p></div>
-        <div data-lang="en"><h2>Install and Use</h2><p>The project ships with `dist/html-go.skill`, and can also be installed from source.</p></div>
+        <div data-lang="zh"><h2>安装和使用</h2><p>不同工具读取扩展的方式不同：Codex 和 Claude Code 使用 skill 目录，Gemini CLI 使用 slash command。</p></div>
+        <div data-lang="en"><h2>Install and Use</h2><p>Different tools load extensions differently: Codex and Claude Code use skill directories, while Gemini CLI uses a slash command.</p></div>
       </div>
-      <div class="install">
+      <div class="install" data-lang="zh">
         <div class="terminal">
           <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-          <pre>git clone git@github.com:zacktian89/html-go-skill.git
+          <pre># Codex
+git clone git@github.com:zacktian89/html-go-skill.git
 cd html-go-skill
-Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\" -Recurse</pre>
+New-Item -ItemType Directory "$env:USERPROFILE\.codex\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\html-go" -Recurse -Force</pre>
         </div>
         <div class="terminal">
           <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-          <pre>[$html-go] Turn this project plan into a standalone HTML artifact.
-
-.\scripts\package.ps1
-dist\html-go.skill</pre>
+          <pre># Claude Code
+git clone git@github.com:zacktian89/html-go-skill.git
+cd html-go-skill
+New-Item -ItemType Directory "$env:USERPROFILE\.claude\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.claude\skills\html-go" -Recurse -Force</pre>
+        </div>
+        <div class="terminal">
+          <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <pre># Gemini CLI
+New-Item -ItemType Directory "$env:USERPROFILE\.gemini\commands" -Force
+# 创建 html-go.toml 自定义命令
+# 然后使用 /html-go 生成单文件 HTML</pre>
+        </div>
+      </div>
+      <div class="install" data-lang="en">
+        <div class="terminal">
+          <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <pre># Codex
+git clone git@github.com:zacktian89/html-go-skill.git
+cd html-go-skill
+New-Item -ItemType Directory "$env:USERPROFILE\.codex\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.codex\skills\html-go" -Recurse -Force</pre>
+        </div>
+        <div class="terminal">
+          <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <pre># Claude Code
+git clone git@github.com:zacktian89/html-go-skill.git
+cd html-go-skill
+New-Item -ItemType Directory "$env:USERPROFILE\.claude\skills" -Force
+Copy-Item .\skills\html-go "$env:USERPROFILE\.claude\skills\html-go" -Recurse -Force</pre>
+        </div>
+        <div class="terminal">
+          <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <pre># Gemini CLI
+New-Item -ItemType Directory "$env:USERPROFILE\.gemini\commands" -Force
+# Create the html-go.toml custom command
+# Then run /html-go to generate HTML</pre>
         </div>
       </div>
     </section>
