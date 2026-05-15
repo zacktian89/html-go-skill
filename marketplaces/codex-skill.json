@@ -1,8 +1,8 @@
 {
   "name": "html-go",
   "displayName": "HTML Go",
-  "version": "0.1.1",
-  "description": "Generate polished standalone single-file HTML artifacts from Markdown files, conversation context, plans, reports, PR reviews, diagrams, explainers, prototypes, and editor-style workflows.",
+  "version": "0.1.2",
+  "description": "Generate polished standalone single-file HTML artifacts from Markdown files, conversation context, plans, reports, PR reviews, diagrams, explainers, prototypes, editor-style workflows, and WeChat Official Account paste-ready rich text.",
   "categories": [
     "Productivity",
     "Writing",
@@ -12,6 +12,7 @@
     "html",
     "artifact",
     "markdown",
+    "wechat",
     "report",
     "presentation",
     "single-file"

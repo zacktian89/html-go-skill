@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>微信公众号复制粘贴 HTML 测试</title>
+  <style>
+    :root {
+      --ivory: #faf9f5;
+      --slate: #141413;
+      --clay: #d97757;
+      --olive: #788c5d;
+      --gray-50: #f7f5ee;
+      --gray-150: #f0eee6;
+      --gray-300: #d1cfc5;
+      --gray-500: #87867f;
+      --gray-700: #3d3d3a;
+      --white: #ffffff;
+      --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --mono: "Cascadia Mono", "SF Mono", Consolas, "Liberation Mono", ui-monospace, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--ivory);
+      color: var(--gray-700);
+      font-family: var(--sans);
+      line-height: 1.6;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 44px 0 72px;
+    }
+
+    .hero,
+    .panel,
+    .article-shell {
+      min-width: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      gap: 20px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero-copy,
+    .panel {
+      border: 1.5px solid var(--gray-300);
+      border-radius: 12px;
+      background: var(--white);
+      padding: 22px;
+    }
+
+    .eyebrow,
+    .label,
+    .status {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 12px;
+    }
+
+    .eyebrow {
+      color: var(--clay);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--slate);
+      font-size: clamp(32px, 5vw, 60px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .summary {
+      margin: 16px 0 0;
+      max-width: 760px;
+      font-size: 17px;
+      color: var(--gray-700);
+    }
+
+    .checks {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .checks li {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-150);
+    }
+
+    .checks li:last-child {
+      border-bottom: 0;
+    }
+
+    .status {
+      color: var(--olive);
+      font-weight: 800;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 0 22px;
+      padding: 12px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 12px;
+      background: rgba(250, 249, 245, .94);
+      backdrop-filter: blur(10px);
+    }
+
+    .toolbar p {
+      margin: 0;
+      color: var(--gray-500);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      background: var(--slate);
+      color: var(--white);
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 14px;
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(217, 119, 87, .35);
+      outline-offset: 2px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, .72fr) minmax(320px, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      color: var(--slate);
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .panel p,
+    .panel li {
+      font-size: 15px;
+    }
+
+    .panel code {
+      border-radius: 6px;
+      background: var(--gray-150);
+      padding: 2px 5px;
+      font-family: var(--mono);
+      overflow-wrap: anywhere;
+    }
+
+    .article-shell {
+      border: 1.5px solid var(--gray-300);
+      border-radius: 12px;
+      background: var(--white);
+      padding: 18px;
+    }
+
+    .article-label {
+      margin: 0 0 14px;
+      color: var(--gray-500);
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        width: min(100% - 24px, 720px);
+        padding: 24px 0 56px;
+      }
+
+      .hero,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">wechat paste mode prototype</div>
+        <h1>微信公众号复制粘贴 HTML 测试页</h1>
+        <p class="summary">这个页面用于验证 HTML Go 能否扩展出面向公众号编辑器的输出模式：正文区域使用简单标签和内联样式，按钮会把正文以 <code>text/html</code> 写入剪贴板。</p>
+      </div>
+      <aside class="panel">
+        <h2>测试要点</h2>
+        <ul class="checks">
+          <li><span class="status">01</span><span>标题、导语、引用、列表、表格、代码块是否保留基础样式。</span></li>
+          <li><span class="status">02</span><span>粘贴进公众号编辑器后，行距、边框、强调色是否接近预期。</span></li>
+          <li><span class="status">03</span><span>正文是否不依赖外部 CSS、脚本、字体或图片资源。</span></li>
+        </ul>
+      </aside>
+    </header>
+
+    <div class="toolbar">
+      <p id="copyStatus">点击按钮后，到微信公众号后台编辑器中粘贴。若浏览器限制剪贴板权限，可手动选中右侧正文复制。</p>
+      <button type="button" id="copyHtml">复制公众号正文</button>
+    </div>
+
+    <section class="layout" aria-label="微信复制粘贴测试">
+      <aside class="panel">
+        <h2>扩展判断</h2>
+        <p>可以扩展。建议把它作为 HTML Go 的一个独立输出模式，保留现有浏览器 artifact 模式。</p>
+        <p>原因很直接：浏览器 artifact 可以保留复杂布局和交互；公众号粘贴 HTML 需要更克制，重点是正文结构、内联样式、可复制性和编辑器兼容性。</p>
+        <p>最小规则可以是：</p>
+        <ul>
+          <li>正文容器内全部关键样式使用 <code>style=""</code>。</li>
+          <li>避免脚本、外链 CSS、外部字体、复杂 grid/flex。</li>
+          <li>保留语义标签，但优先使用公众号编辑器更稳的 <code>section</code>、<code>p</code>、<code>span</code>、<code>table</code>。</li>
+          <li>生成一个复制按钮，把正文作为 <code>text/html</code> 放进剪贴板；含图内容同时尝试写入 <code>image/png</code>。</li>
+        </ul>
+      </aside>
+
+      <div class="article-shell">
+        <p class="article-label label">copy target preview</p>
+        <article id="wechatArticle" style="max-width: 677px; margin: 0 auto; padding: 0; color: #2b2f33; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; line-height: 1.85; letter-spacing: 0;">
+          <section style="margin: 0 0 28px; padding: 0 0 18px; border-bottom: 1px solid #ece7df;">
+            <p style="margin: 0 0 10px; color: #b85c3e; font-size: 13px; font-weight: 700; letter-spacing: .08em;">HTML GO / 微信复制测试</p>
+            <h1 style="margin: 0 0 14px; color: #141413; font-size: 28px; line-height: 1.25; font-weight: 750; letter-spacing: 0;">把 artifact 变成公众号可粘贴正文</h1>
+            <p style="margin: 0; color: #5b5b55; font-size: 15px;">这是一段用于测试的导语。目标是生成一段粘贴到公众号编辑器后仍然可读、可改、样式不散的正文 HTML。</p>
+          </section>
+
+          <section style="margin: 0 0 24px; padding: 18px 18px 16px; background: #faf9f5; border: 1px solid #e3dacc; border-radius: 8px;">
+            <p style="margin: 0 0 8px; color: #141413; font-weight: 700;">一句话结论</p>
+            <p style="margin: 0; color: #3d3d3a;">HTML Go 可以增加一个 <span style="color: #b85c3e; font-weight: 700;">WeChat Paste</span> 模式：输出一个测试页，同时内置可复制的公众号正文 HTML。</p>
+          </section>
+
+          <section style="margin: 0 0 26px;">
+            <h2 style="margin: 0 0 12px; padding-left: 10px; border-left: 4px solid #d97757; color: #141413; font-size: 20px; line-height: 1.4; font-weight: 720;">它和普通 HTML artifact 的差异</h2>
+            <p style="margin: 0 0 14px;">普通 artifact 追求完整的浏览器体验，可以使用响应式布局、交互、视觉层级和局部脚本。公众号粘贴模式追求的是编辑器兼容性，因此样式需要收敛。</p>
+            <table style="width: 100%; border-collapse: collapse; margin: 14px 0 0; font-size: 14px;">
+              <thead>
+                <tr>
+                  <th style="padding: 10px; background: #f0eee6; border: 1px solid #d1cfc5; color: #141413; text-align: left;">项目</th>
+                  <th style="padding: 10px; background: #f0eee6; border: 1px solid #d1cfc5; color: #141413; text-align: left;">建议</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #d1cfc5;">样式</td>
+                  <td style="padding: 10px; border: 1px solid #d1cfc5;">关键样式放到内联 style</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #d1cfc5;">布局</td>
+                  <td style="padding: 10px; border: 1px solid #d1cfc5;">单列正文优先，少用复杂嵌套</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #d1cfc5;">交互</td>
+                  <td style="padding: 10px; border: 1px solid #d1cfc5;">仅保留复制按钮，正文不依赖 JS</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section style="margin: 0 0 26px;">
+            <h2 style="margin: 0 0 12px; padding-left: 10px; border-left: 4px solid #788c5d; color: #141413; font-size: 20px; line-height: 1.4; font-weight: 720;">推荐的最小输出结构</h2>
+            <ol style="margin: 0; padding-left: 22px;">
+              <li style="margin: 0 0 8px;">外层测试页：包含预览、说明、复制按钮。</li>
+              <li style="margin: 0 0 8px;">正文片段：只保留公众号要粘贴的内容。</li>
+              <li style="margin: 0;">剪贴板写入：同时提供 <span style="font-family: Menlo, Consolas, monospace; background: #f0eee6; padding: 1px 5px; border-radius: 4px;">text/html</span> 和纯文本兜底。</li>
+            </ol>
+          </section>
+
+          <section style="margin: 0 0 26px;">
+            <h2 style="margin: 0 0 12px; padding-left: 10px; border-left: 4px solid #d97757; color: #141413; font-size: 20px; line-height: 1.4; font-weight: 720;">图片粘贴测试</h2>
+            <p style="margin: 0 0 12px;">下面这张测试图由页面内的 Canvas 生成，再转成 PNG。复制时页面会把正文 HTML 和 PNG 图片数据一起写入剪贴板。</p>
+            <img id="wechatTestImage" alt="HTML Go 微信图片复制测试图" style="display: block; width: 100%; height: auto; margin: 0; border-radius: 8px; border: 1px solid #d1cfc5; background: #f7f5ee;" />
+            <p style="margin: 8px 0 0; color: #87867f; font-size: 13px;">发布前请确认公众号编辑器已经保留或上传了图片；本地 <span style="font-family: Menlo, Consolas, monospace; background: #f0eee6; padding: 1px 5px; border-radius: 4px;">file://</span> 图片路径不适合作为正式正文来源。</p>
+          </section>
+
+          <blockquote style="margin: 0 0 26px; padding: 14px 16px; border-left: 4px solid #d97757; background: #fff8f3; color: #4c4b47;">
+            <p style="margin: 0;">判断这个模式是否成功，重点看粘贴到公众号后台后是否还适合继续编辑。</p>
+          </blockquote>
+
+          <section style="margin: 0 0 28px;">
+            <p style="margin: 0 0 10px; color: #141413; font-weight: 700;">代码块粘贴测试</p>
+            <pre style="margin: 0; padding: 14px; overflow-x: auto; color: #f7f5ee; background: #141413; border-radius: 8px; font-size: 13px; line-height: 1.7;"><code>mode: wechat-paste
+copy: text/html
+styles: inline
+external_assets: false</code></pre>
+          </section>
+
+          <section style="margin: 0; padding: 16px 18px; background: #f7f5ee; border-radius: 8px;">
+            <p style="margin: 0 0 8px; color: #141413; font-weight: 700;">下一步验证</p>
+            <p style="margin: 0; color: #5b5b55;">把这段内容粘贴到公众号编辑器后，检查标题大小、引用块、表格边框、测试图片和代码块背景。如果这些都能接受，就可以把模式写进 skill 规则。</p>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const button = document.getElementById("copyHtml");
+    const statusLine = document.getElementById("copyStatus");
+    const article = document.getElementById("wechatArticle");
+    const testImage = document.getElementById("wechatTestImage");
+    let testImageBlobPromise = createTestImage();
+
+    function createTestImage() {
+      return new Promise((resolve) => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1200;
+        canvas.height = 675;
+        const ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#faf9f5";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#f0eee6";
+        ctx.fillRect(48, 48, 1104, 579);
+        ctx.strokeStyle = "#d1cfc5";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(48, 48, 1104, 579);
+
+        ctx.fillStyle = "#d97757";
+        ctx.fillRect(88, 92, 180, 14);
+        ctx.fillStyle = "#788c5d";
+        ctx.fillRect(88, 120, 120, 14);
+
+        ctx.fillStyle = "#141413";
+        ctx.font = "700 64px Microsoft YaHei, PingFang SC, sans-serif";
+        ctx.fillText("WeChat Paste", 88, 235);
+        ctx.font = "700 54px Microsoft YaHei, PingFang SC, sans-serif";
+        ctx.fillText("图片复制测试", 88, 315);
+
+        ctx.fillStyle = "#3d3d3a";
+        ctx.font = "34px Microsoft YaHei, PingFang SC, sans-serif";
+        ctx.fillText("PNG data URL + image/png clipboard", 88, 390);
+        ctx.fillText("粘贴后检查图片是否保留或上传", 88, 445);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(790, 150, 250, 250, 28);
+        } else {
+          ctx.rect(790, 150, 250, 250);
+        }
+        ctx.fill();
+        ctx.strokeStyle = "#b85c3e";
+        ctx.lineWidth = 8;
+        ctx.stroke();
+        ctx.fillStyle = "#b85c3e";
+        ctx.font = "700 120px Microsoft YaHei, PingFang SC, sans-serif";
+        ctx.fillText("图", 850, 315);
+
+        const dataUrl = canvas.toDataURL("image/png");
+        testImage.src = dataUrl;
+        canvas.toBlob((blob) => resolve(blob), "image/png");
+      });
+    }
+
+    function plainTextFrom(node) {
+      return node.innerText.replace(/\n{3,}/g, "\n\n").trim();
+    }
+
+    async function copyArticle() {
+      const imageBlob = await testImageBlobPromise;
+      const html = article.outerHTML;
+      const text = plainTextFrom(article);
+
+      try {
+        if (navigator.clipboard && window.ClipboardItem) {
+          const clipboardTypes = {
+            "text/html": new Blob([html], { type: "text/html" }),
+            "text/plain": new Blob([text], { type: "text/plain" })
+          };
+
+          if (imageBlob) {
+            clipboardTypes["image/png"] = imageBlob;
+          }
+
+          const item = new ClipboardItem(clipboardTypes);
+          await navigator.clipboard.write([item]);
+          statusLine.textContent = "已复制为富文本 HTML，并尝试包含 PNG 图片数据。现在可以到微信公众号编辑器中粘贴测试。";
+          return;
+        }
+      } catch (error) {
+        try {
+          const item = new ClipboardItem({
+            "text/html": new Blob([html], { type: "text/html" }),
+            "text/plain": new Blob([text], { type: "text/plain" })
+          });
+          await navigator.clipboard.write([item]);
+          statusLine.textContent = "已复制富文本 HTML。浏览器拒绝了 PNG 剪贴板数据，请粘贴后检查图片是否保留。";
+          return;
+        } catch (fallbackError) {
+          statusLine.textContent = "浏览器没有允许直接写入富文本剪贴板，已尝试使用手动选择兜底。";
+        }
+      }
+
+      const range = document.createRange();
+      const selection = window.getSelection();
+      range.selectNode(article);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      statusLine.textContent = "已选中正文区域。请按 Ctrl+C 复制，然后到微信公众号编辑器粘贴。";
+    }
+
+    button.addEventListener("click", copyArticle);
+  </script>
+</body>
+</html>

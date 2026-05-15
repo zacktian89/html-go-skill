@@ -24,7 +24,7 @@ HTML Go 的初衷就是把这个趋势变成一个可复用的 Codex skill：保
 
 ## 实际效果
 
-使用 HTML Go 后，输出不是普通 Markdown 渲染页，而是一个完整的 `.html` 文件：
+使用 HTML Go 后，输出会成为一个完整的 `.html` 文件，而非普通 Markdown 渲染页：
 
 - 所有 CSS 和必要 JavaScript 都内联在单文件中
 - 不依赖 CDN、外部字体、外部图片或构建工具
@@ -135,6 +135,36 @@ Rules:
 ```text
 html-artifacts/YYYYMMDD-HHMM-<slug>.html
 ```
+
+### 微信公众号复制粘贴模式
+
+如果目标是粘贴到微信公众号后台编辑器，直接说明 `微信公众号`、`公众号`、`WeChat Paste` 或 `复制粘贴 HTML`。HTML Go 会生成一个单文件测试页，其中包含预览正文和复制按钮；真正要粘贴的正文会尽量使用简单标签和内联样式。
+
+示例：
+
+```text
+[$html-go] 把这篇 Markdown 转成微信公众号可复制粘贴的 HTML
+```
+
+```text
+Use $html-go WeChat Paste mode for this article.
+```
+
+使用步骤：
+
+1. 打开生成的 `html-artifacts/YYYYMMDD-HHMM-<slug>.html`。
+2. 点击页面里的复制按钮。
+3. 到微信公众号后台编辑器中粘贴。
+4. 检查标题、引用块、表格、代码块和段落间距是否保留。
+
+图片处理：
+
+- 不要把 `file://` 本地图片路径放进要粘贴的正文。
+- 测试页可以用内嵌 PNG 图片，并在复制时尝试同时写入 `image/png` 剪贴板数据。
+- 正式发布时，优先让图片通过公众号编辑器上传，或使用发布流程确认可用的稳定 HTTPS 图片地址。
+- 发布前检查粘贴后的图片是否已经被公众号编辑器保留或上传。
+
+这个模式关注的是公众号编辑器里的最终效果；浏览器中的页面只是复制和预览入口。
 
 ## 打包
 
@@ -295,6 +325,36 @@ Default output location:
 ```text
 html-artifacts/YYYYMMDD-HHMM-<slug>.html
 ```
+
+### WeChat Official Account Paste Mode
+
+When the target is the WeChat Official Account editor, mention `WeChat Paste`, `WeChat Official Account`, `微信公众号`, `公众号`, or `copy-paste HTML`. HTML Go will generate a standalone test page with a preview article and a copy button. The article body intended for pasting uses simple tags and inline styles.
+
+Examples:
+
+```text
+Use $html-go to turn this Markdown into WeChat Official Account paste-ready HTML.
+```
+
+```text
+[$html-go] WeChat Paste mode for this article.
+```
+
+How to use it:
+
+1. Open the generated `html-artifacts/YYYYMMDD-HHMM-<slug>.html`.
+2. Click the copy button in the page.
+3. Paste into the WeChat Official Account editor.
+4. Check headings, quote blocks, tables, code blocks, and paragraph spacing.
+
+Image handling:
+
+- Do not put `file://` local image paths in the pasted article body.
+- A test page may use an embedded PNG and try to include `image/png` clipboard data during copy.
+- For production publishing, prefer images uploaded through the WeChat editor or stable HTTPS image URLs accepted by the publishing workflow.
+- Before publishing, verify that pasted images are retained or uploaded by the WeChat editor.
+
+This mode optimizes for the final result inside the WeChat editor; the browser page is only the preview and copy surface.
 
 ## Package
 
